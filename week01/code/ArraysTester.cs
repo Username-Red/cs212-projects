@@ -75,40 +75,27 @@ public static class ArraysTester {
 
         // take the 'data' list and split it at the 'amount' index, forming two separate lists/arrays
         // take the two new lists/arrays and combine them back to front, allowing for the 'rotation' effect
+        
 
+        List<int> start = new List<int>();
+        List<int> end = new List<int>();
+        
+        // For end
+        for(int i = data.Count()-amount; i < data.Count(); i++) {
+            end.Add(data[i]);
+        }
 
-        List<int> data1 = new List<int>();
-        List<int> data2 = new List<int>();
+       
+        // for start
+        for(int i = 0; i < data.Count()-amount; i++) {
+            start.Add(data[i]);
+        }
+        
 
-        for(int i = amount; i < data.Count(); i++) {
-            data2.Add(data[i]);
-        };
-
-        for(int i = 0; i < amount; i++) {
-            data1.Add(data[i]);
-        };
-
-        data2.AddRange(data1);
+        end.AddRange(start);
         
         data.Clear();
 
-        data.AddRange(data2);
-
-        // List<int> data2 = new List<int>();
-
-        // for (int i = amount; i < data.Count(); i++) {
-        //     data2.Add(data[i]);
-        // }
-
-        // for (int i = 0; i < amount; i++) {
-        //     data2.Add(data[i]);
-        // }
-
-        // data = data2;
-        
-
-
-
-
+        data.AddRange(end);
     }
 }
