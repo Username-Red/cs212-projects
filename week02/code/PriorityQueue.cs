@@ -32,14 +32,44 @@ public class PriorityQueue {
 
         // Find the index of the item with the highest priority to remove
         var highPriorityIndex = 0;
-        for (int index = 1; index < _queue.Count - 1; index++) {
-            if (_queue[index].Priority >= _queue[highPriorityIndex].Priority)
-                highPriorityIndex = index;
+        List<int> highests = new List<int>();
+        for (int index = 1; index <= _queue.Count - 1; index++) {
+            if (_queue[index].Priority >= _queue[highPriorityIndex].Priority) {
+                highPriorityIndex = index; 
+                highests.Add(index);
+                
+            }
+
+
+                
+
+            
+        }
+        
+        for (int i = 0; i < highests.Count(); i++) {
+            if (highests[i] != highPriorityIndex) {
+                highests.Remove(i);
+            }
+            Console.WriteLine(highests[i]);
         }
 
         // Remove and return the item with the highest priority
         var value = _queue[highPriorityIndex].Value;
-        return value;
+        if (_queue[highests[0]].Priority == _queue[highPriorityIndex].Priority) {
+            value = _queue[highests[0]].Value;
+            //Console.WriteLine($"{_queue[highests[0]].Value} has been removed from the list.");
+            _queue.RemoveAt(highests[0]);
+            return value;
+        }
+
+        else {
+            //Console.WriteLine($"{_queue[highPriorityIndex].Value} has been removed from the list.");
+            _queue.RemoveAt(highPriorityIndex);
+            return value;
+        }
+        
+        
+        
     }
 
     public override string ToString() {
