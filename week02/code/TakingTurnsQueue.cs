@@ -30,18 +30,34 @@ public class TakingTurnsQueue {
     /// if the queue is empty.
     /// </summary>
     public void GetNextPerson() {
+        // If there is nobody in the que, display the error message
         if (_people.IsEmpty())
             Console.WriteLine("No one in the queue.");
+
+        // if there IS someone in the que
         else {
+            //Take the person out of the que
             Person person = _people.Dequeue();
+            // Check the person's number of turns. 
             if (person.Turns > 1) {
+                // If greater than 1, remove one turn from their turn count 
+                // and put them back at the end of the queue
                 person.Turns -= 1;
                 _people.Enqueue(person);
             }
 
-            Console.WriteLine(person.Name);
+            // Solution test 1
+            else if (person.Turns <= 0) {
+                _people.Enqueue(person);
+            }
+
+            Console.WriteLine($"{person.Name}, {person.Turns}");
         }
     }
+
+    // public void IterateTurns() {
+    //     foreach(Person person in _people)
+    // }
 
     public override string ToString() {
         return _people.ToString();

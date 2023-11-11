@@ -23,9 +23,16 @@ public static class TakingTurns {
         players.AddPerson("Tim", 5);
         players.AddPerson("Sue", 3);
         // Console.WriteLine(players);    // This can be un-commented out for debug help
-        while (players.Length > 0)
+        while (players.Length > 0) {
             players.GetNextPerson();
+        }
+            
+            
+    
+            
         // Defect(s) Found: 
+        // Code does not behave in the expected way. Instead of going through the que and resetting it each time, 
+        // it simply outputs the name of the player equal to the aount of turns they have, all in the same block. 
 
         Console.WriteLine("---------");
 
@@ -76,6 +83,6 @@ public static class TakingTurns {
         Console.WriteLine("Test 4");
         players = new TakingTurnsQueue();
         players.GetNextPerson();
-        // Defect(s) Found:
+        // Defect(s) Found: none ^w^
     }
 }

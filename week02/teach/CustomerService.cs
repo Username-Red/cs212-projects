@@ -9,6 +9,8 @@
  *
  */
 
+using System.Reflection;
+
 /// <summary>
 /// Maintain a Customer Service Queue.  Allows new customers to be 
 /// added and allows customers to be serviced.
@@ -24,7 +26,19 @@ public class CustomerService {
         // Test 1
         // Scenario: 
         // Expected Result: 
+
+        CustomerService customer = new CustomerService(0);
+        
         Console.WriteLine("Test 1");
+        if (customer._maxSize != 10) {
+            Console.WriteLine("It failed");
+        }
+        else {
+            Console.WriteLine("It worked!");
+        }
+        
+        
+        
 
         // Defect(s) Found: 
 

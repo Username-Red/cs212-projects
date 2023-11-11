@@ -15,7 +15,7 @@ public static class MysteryStack1 {
             stack.Push(letter);
 
         var result = "";
-        while (stack.Count > 0)
+        while (stack.Count() > 0)
             result += stack.Pop();
 
         return result;
