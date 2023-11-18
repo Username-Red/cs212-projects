@@ -39,10 +39,6 @@ public class PriorityQueue {
                 highests.Add(index);
                 
             }
-
-
-                
-
             
         }
         

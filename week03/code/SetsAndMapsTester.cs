@@ -1,4 +1,6 @@
 using System.Text.Json;
+using Microsoft.VisualBasic;
+using System.Linq;
 
 public static class SetsAndMapsTester {
     public static void Run() {
@@ -39,6 +41,7 @@ public static class SetsAndMapsTester {
         // Problem 3: Anagrams
         // Sample Test Cases (may not be comprehensive) 
         Console.WriteLine("\n=========== Anagram TESTS ===========");
+        Console.WriteLine(IsAnagram("ABB", "AAB")); //false
         Console.WriteLine(IsAnagram("CAT", "ACT")); // true
         Console.WriteLine(IsAnagram("DOG", "GOOD")); // false
         Console.WriteLine(IsAnagram("AABBCCDD", "ABCD")); // false
@@ -108,9 +111,31 @@ public static class SetsAndMapsTester {
     /// </summary>
     /// <param name="words">An array of 2-character words (lowercase, no duplicates)</param>
     private static void DisplayPairs(string[] words) {
+        var matches = new HashSet<string>(words);
+        var blep = new HashSet<string>();
+
+        foreach(string item in matches) {
+            string word = item;
+            string pair = Reverse(word);
+            if (matches.Contains(pair) && blep.Contains(word) == false) {
+                Console.WriteLine($"{word} & {pair}");
+                blep.Add(word);
+                blep.Add(pair);
+            }
+        }
+        
         // To display the pair correctly use something like:
         // Console.WriteLine($"{word} & {pair}");
         // Each pair of words should displayed on its own line.
+    }
+
+
+    //I have elected to write my own small thing to reverse a string 
+    //without using a for loop to save on time efficiency 
+    public static string Reverse( string s ) {
+        char[] charArray = s.ToCharArray();
+        Array.Reverse(charArray);
+        return new string(charArray);
     }
 
     /// <summary>
@@ -132,6 +157,15 @@ public static class SetsAndMapsTester {
         foreach (var line in File.ReadLines(filename)) {
             var fields = line.Split(",");
             // Todo Problem 2 - ADD YOUR CODE HERE
+            string key = fields[3];
+            if (degrees.ContainsKey(key)) {
+                degrees[key] += 1;
+            } else {
+                degrees[key] = 1;
+            }
+            
+            
+            
         }
 
         return degrees;
@@ -158,7 +192,77 @@ public static class SetsAndMapsTester {
     /// #############
     private static bool IsAnagram(string word1, string word2) {
         // Todo Problem 3 - ADD YOUR CODE HERE
-        return false;
+        var dict1 = new Dictionary<char, int>();
+        var dict2 = new Dictionary<char, int>();
+        var count = 0;
+        
+
+        // turn words into uppercase so that case sensitivity won't be a problem
+        word1 = word1.ToUpper();
+        word2 = word2.ToUpper();
+        
+
+        // ...
+
+        
+        word1 = String.Concat(word1.Where(c => !Char.IsWhiteSpace(c)));
+        word2 = String.Concat(word2.Where(c => !Char.IsWhiteSpace(c)));
+        
+        
+
+        // populate the dictionaries with their respective information
+        foreach(char letter in word1) {
+            if (letter != ' ') {
+                if (dict1.ContainsKey(letter)) {
+                    dict1[letter] += 1;
+                } else {
+                    dict1[letter] = 1;
+                }
+            }
+        }
+
+        foreach(char letter in word2) {
+            if (letter != ' ') {
+                if (dict2.ContainsKey(letter)) {
+                    dict2[letter] += 1;
+                } else {
+                    dict2[letter] = 1;
+                }
+            }
+        }
+
+        
+
+        // foreach(KeyValuePair<char, int> pair in dict2) {
+        //     Console.Write(pair);
+        // }
+        // Console.WriteLine();
+        // foreach(KeyValuePair<char, int> pair in dict1) {
+        //     Console.Write(pair);
+        // }
+        // Console.WriteLine();
+
+        
+
+        // check if each letter in each dictionary appears the same number of times in both
+        if (dict1.Count != dict2.Count) {
+            return false;
+        }
+        
+        foreach(char letter in word1) {
+            if (dict1.ContainsKey(letter) && dict2.ContainsKey(letter)) {
+                if (dict1[letter] == dict2[letter]) {
+                    count += 1;
+                } else {
+                    return false;
+                }
+
+            } else {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /// <summary>
@@ -231,6 +335,8 @@ public static class SetsAndMapsTester {
 
         var featureCollection = JsonSerializer.Deserialize<FeatureCollection>(json, options);
         // 1. Add your code to map the json to the feature collection object
-        // 2. Print out each place a earthquake has happened today
+        // 2. Print out each place an earthquake has happened today
+        
+        Console.WriteLine(featureCollection.features);
     }
 }

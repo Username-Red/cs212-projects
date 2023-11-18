@@ -1,4 +1,6 @@
-﻿public class DuplicateCounter
+﻿using System.Reflection.Metadata.Ecma335;
+
+public class DuplicateCounter
 {
     //Count how many duplicates are in a collection of data.
 
@@ -25,6 +27,25 @@
     private static int CountDuplicates(int[] data)
     {
         // Add code here.
-        return 0;
+
+        //Create a set to hold only the individual numbers that have no duplicates
+        var individual = new HashSet<int>();
+        //Create a variable to keep track of how many duplicates there have been
+        var duplicates = 0;
+
+        // loop through each item in 'data' 
+        foreach (var x in data)
+        {   
+            // if 'individual' contains 'x', the duplicate counter increases by 1
+            if (individual.Contains(x))
+                duplicates += 1;
+
+            // if 'individual' does NOT contain 'x', then 'x' will be added to the list of individual numbers
+            else
+                individual.Add(x);
+        }
+
+        // Return how many duplicates there were 
+        return duplicates;
     }
 }
