@@ -337,6 +337,6 @@ public static class SetsAndMapsTester {
         // 1. Add your code to map the json to the feature collection object
         // 2. Print out each place an earthquake has happened today
         
-        Console.WriteLine(featureCollection.features);
+        //Console.WriteLine(featureCollection.features);
     }
 }
