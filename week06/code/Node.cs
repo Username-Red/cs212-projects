@@ -15,6 +15,10 @@ public class Node {
             else
                 Left.Insert(value);
         }
+
+        else if (value == Data) {
+
+        }
         else {
             // Insert to the right
             if (Right is null)
@@ -26,11 +30,48 @@ public class Node {
 
     public bool Contains(int value) {
         // TODO Start Problem 2
+        if (Data == value) {
+            return true;
+        }
+
+        else if (value < Data && Left != null) {
+            return Left.Contains(value);
+        }
+
+        else if (value > Data && Right != null) {
+            return Right.Contains(value);
+        }
+        
         return false;
     }
 
     public int GetHeight() {
         // TODO Start Problem 4
-        return 0; // Replace this line with the correct return statement(s)
+
+        if (Left is not null && Right is not null)
+        {
+            // int leftSubtreeHeight = Left.GetHeight();
+            // int rightSubtreeHeight = Right.GetHeight();
+
+            // Return the height of the subtree rooted at this node
+            // var height = 1 + Math.Max(leftSubtreeHeight, rightSubtreeHeight);
+            // return height;
+        }
+
+
+        int leftSubtreeHeight = 0;
+        int rightSubtreeHeight = 0;
+        if (Left is not null) {
+            leftSubtreeHeight = Left.GetHeight();
+        }
+
+        if (Right is not null) {
+            rightSubtreeHeight = Right.GetHeight();
+        }
+
+        var height = 1 + Math.Max(leftSubtreeHeight, rightSubtreeHeight);
+        return height;
+
+        // Replace this line with the correct return statement(s)
     }
 }

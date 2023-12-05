@@ -6,6 +6,7 @@ public static class TreesTester {
         // Sample Test Cases (may not be comprehensive)
         Console.WriteLine("\n=========== PROBLEM 1 TESTS ===========");
         BinarySearchTree tree = new BinarySearchTree();
+        
         tree.Insert(5);
         tree.Insert(3);
         tree.Insert(7);
@@ -98,5 +99,22 @@ public static class TreesTester {
     /// <param name="bst">the BinarySearchTree in which to insert the values</param>
     private static void InsertMiddle(int[] sortedNumbers, int first, int last, BinarySearchTree bst) {
         // TODO Start Problem 5
+        
+        // insertmuddle(middle-1)
+        // insertmuddle(middle+1)
+        
+
+        // if left < 0 || right > sortedNUmbers.legth 
+        // if there is nothing before left and nothing after right
+
+        if (first <= last) {
+            
+            int middle = (first + last) / 2;
+
+            bst.Insert(sortedNumbers[middle]);
+
+            InsertMiddle(sortedNumbers, first, middle - 1, bst);
+            InsertMiddle(sortedNumbers, middle + 1, last, bst);
+        }
     }
 }
